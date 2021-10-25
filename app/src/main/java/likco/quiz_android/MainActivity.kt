@@ -51,28 +51,48 @@ class MainActivity : ComponentActivity() {
                             GlobalScope.launch(Dispatchers.IO) {
                                 val clientHandler = ClientHandler(ip, port)
                                 isConnected = false
+<<<<<<< HEAD
 
                                 clientHandler.run()
+=======
+                                val exec = Executors.newFixedThreadPool(1)
+
+                                exec.execute(clientHandler)
+>>>>>>> cfb92bd (Initial commit)
 
                                 clientHandler.onResponse = {
                                     lastResponse = it
                                     text += "\n$it"
                                 }
+<<<<<<< HEAD
+=======
+
+                                exec.shutdown()
+>>>>>>> cfb92bd (Initial commit)
                             }
                         }) {
                             Text("Connect")
                         }
 
+<<<<<<< HEAD
                         Box(Modifier.size(Dp(500F)).fillMaxWidth()) {
+=======
+                        Box(Modifier.size(Dp(450F)).fillMaxWidth()) {
+>>>>>>> cfb92bd (Initial commit)
                             Column(Modifier.verticalScroll(verticalScrollState).fillMaxSize()) {
                                 Text(text)
                             }
                         }
 
+<<<<<<< HEAD
 
 
                         if (lastResponse.contains("Picture")) {
                             val bitmap = assetsToBitmap(lastResponse.substringAfter(": "))
+=======
+                        if (lastResponse.contains("Picture")) {
+                            val bitmap = assetsToBitmap(lastResponse.substringAfterLast(": "))
+>>>>>>> cfb92bd (Initial commit)
                             Image(
                                 modifier = Modifier.fillMaxSize(),
                                 bitmap = bitmap.asImageBitmap(),
